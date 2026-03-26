@@ -29,26 +29,56 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public Usuario guardar(Usuario usuario) {
-        return null;
+        validarUsuario(usuario);
+        return usuarioRepository.save(usuario);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Usuario> buscarPorCodigoU(Long codigoU) {
-        return Optional.empty();
+        return usuarioRepository.findById(codigoU);
     }
 
     @Override
     public Usuario actualizar(Long codigoU, Usuario usuario) {
-        return null;
+        if(!usuarioRepository.existsById((codigoU))){
+            throw new RuntimeException("El Usuario no se encontro con el codigoU"+codigoU);
+        }
+        usuario.setCodigoUsuario(codigoU);
+        validarUsuario(usuario);
+        return usuarioRepository.save(usuario);
     }
 
     @Override
     public void eliminar(Long codigoU) {
-
+        if (!usuarioRepository.existsById(codigoU)){
+            throw new RuntimeException("El Usuario no se encontro con el CodigoU"+ codigoU);
+        }
+        usuarioRepository.deleteById(codigoU);
     }
 
     @Override
     public boolean existePorCodigoU(Long codigoU) {
-        return false;
+        return usuarioRepository.existsById(codigoU);
     }
+
+    private void validarUsuario(Usuario usuario){
+        if(usuario.getCodigoUsuario()== null){
+            throw new IllegalArgumentException(("El Codigo Usuario es un dato obligatorio"));
+        }
+        if (usuario.getUsername()== null || usuario.getUsername().trim().isEmpty()){
+            throw new IllegalArgumentException("El nombre es un dato obligatorio");
+        }
+        if (usuario.getPassword()== null || usuario.getPassword().trim().isEmpty()){
+            throw new IllegalArgumentException("El Password es un dato obligatorio");
+        }
+        if (usuario.getEmail()== null || usuario.getEmail().trim().isEmpty()){
+            throw new IllegalArgumentException("El Email es un dato obligatorio");
+        }if (usuario.getRol()== null || usuario.getRol().trim().isEmpty()){
+            throw new IllegalArgumentException("el Rol es un dato obligatorio");
+        }if (usuario.getEstado()== null){
+            throw new IllegalArgumentException("El estado es un dato obligatorio");
+        }
+    }
+
 }
