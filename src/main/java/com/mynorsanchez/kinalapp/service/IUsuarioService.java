@@ -13,4 +13,5 @@ Usuario guardar (Usuario usuario);
 
 Optional<Usuario> buscarPorCodigoU(String codigoU);
 
+Usuario actualizar(String codigoU, Usuario usuario);
 }
