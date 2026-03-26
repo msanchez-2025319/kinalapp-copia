@@ -8,4 +8,5 @@ public interface IUsuarioService {
 List<Usuario> listarTodo();
 List<Usuario> listarActivos();
 
+Usuario guardar (Usuario usuario);
 }
