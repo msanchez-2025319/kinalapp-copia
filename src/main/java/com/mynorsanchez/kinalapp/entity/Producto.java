@@ -34,5 +34,44 @@ public class Producto {
         this.stock = stock;
         this.estado = estado;
     }
-    
+
+    public String getCodigoCliente() {
+        return codigoCliente;
+    }
+
+    public void setCodigoCliente(String codigoCliente) {
+        this.codigoCliente = codigoCliente;
+    }
+
+    public String getNombre_producto() {
+        return nombre_producto;
+    }
+
+    public void setNombre_producto(String nombre_producto) {
+        this.nombre_producto = nombre_producto;
+    }
+
+    public BigDecimal getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(BigDecimal precio) {
+        this.precio = precio;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
 }
