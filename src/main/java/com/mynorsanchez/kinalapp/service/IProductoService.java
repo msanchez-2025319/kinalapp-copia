@@ -12,4 +12,6 @@ public interface IProductoService {
     Producto guardar (Producto producto);
 
     Optional<Producto> buscarPorCodigoProducto(String codigoProducto);
+
+    Producto actualizar(String codigoProducto, Producto producto);
 }
