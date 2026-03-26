@@ -55,7 +55,7 @@ public class UsuarioController {
         }
     }
 
-    @PutMapping("/codigoU")
+    @PutMapping("/{codigoU}")
     public ResponseEntity<?> actualizar(@PathVariable Long codigoU, @RequestBody Usuario usuario) {
         try {
             if (!usuarioService.existePorCodigoU(codigoU)) {
@@ -68,6 +68,12 @@ public class UsuarioController {
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/codigoU")
+    public ResponseEntity<List<Usuario>> listarActivos(){
+        List<Usuario> usuarios = usuarioService.listarActivos();
+        return ResponseEntity.ok(usuarios);
     }
 
 
