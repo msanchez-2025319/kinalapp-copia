@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ProductoRepository extends JpaRepository <Producto, String> {
-    List<Producto> finByEstado(String producto);
+public interface ProductoRepository extends JpaRepository <Producto, Long> {
+    List<Producto> finByEstado(Long estado);
 }
