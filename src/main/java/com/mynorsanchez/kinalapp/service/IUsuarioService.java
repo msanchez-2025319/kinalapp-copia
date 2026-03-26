@@ -16,4 +16,7 @@ Optional<Usuario> buscarPorCodigoU(String codigoU);
 Usuario actualizar(String codigoU, Usuario usuario);
 
 void eliminar(String codigoU);
+
+boolean existePorCodigoU (String codigoU);
 }
+
