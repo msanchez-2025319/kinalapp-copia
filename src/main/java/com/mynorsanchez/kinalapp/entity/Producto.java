@@ -13,34 +13,34 @@ import java.math.BigDecimal;
 public class Producto {
     @Id
     @Column (name = "codigo_producto")
-    private String codigoProcucto;
+    private Long codigoProducto;
     @Column
     private  String nombre_producto;
     @Column(precision = 10, scale = 2)
     private BigDecimal precio;
     @Column
-    private int stock;
+    private Long stock;
     @Column
-    private int estado;
+    private Long estado;
 
     public Producto(){
 
     }
 
-    public Producto(String codigoCliente, String nombre_producto, BigDecimal precio, int stock, int estado) {
-        this.codigoCliente = codigoCliente;
+    public Producto(Long codigoProducto, String nombre_producto, BigDecimal precio, Long stock, Long estado) {
+        this.codigoProducto = codigoProducto;
         this.nombre_producto = nombre_producto;
         this.precio = precio;
         this.stock = stock;
         this.estado = estado;
     }
 
-    public String getCodigoCliente() {
-        return codigoCliente;
+    public Long getCodigoProducto() {
+        return codigoProducto;
     }
 
-    public void setCodigoCliente(String codigoCliente) {
-        this.codigoCliente = codigoCliente;
+    public void setCodigoProducto(Long codigoProducto) {
+        this.codigoProducto = codigoProducto;
     }
 
     public String getNombre_producto() {
@@ -59,19 +59,19 @@ public class Producto {
         this.precio = precio;
     }
 
-    public int getStock() {
+    public Long getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(Long stock) {
         this.stock = stock;
     }
 
-    public int getEstado() {
+    public Long getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(Long estado) {
         this.estado = estado;
     }
 }
