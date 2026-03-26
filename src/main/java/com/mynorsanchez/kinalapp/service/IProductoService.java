@@ -8,5 +8,5 @@ public interface IProductoService {
     List<Producto> listarTodo();
     List<Producto> listarActivos();
 
-
+    Producto guardar (Producto producto);
 }
