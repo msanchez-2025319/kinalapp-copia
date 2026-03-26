@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Usorios")
+@RequestMapping("/usorios")
 
 public class UsuarioController {
 
@@ -61,8 +61,8 @@ public class UsuarioController {
             if (!usuarioService.existePorCodigoU(codigoU)) {
                 return ResponseEntity.notFound().build();
             }
-            Usuario usuariActualizado = usuarioService.actualizar(codigoU, usuario);
-            return ResponseEntity.ok(usuariActualizado);
+            Usuario usuarioActualizado = usuarioService.actualizar(codigoU, usuario);
+            return ResponseEntity.ok(usuarioActualizado);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (RuntimeException e) {
