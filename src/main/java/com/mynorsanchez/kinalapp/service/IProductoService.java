@@ -14,4 +14,7 @@ public interface IProductoService {
     Optional<Producto> buscarPorCodigoProducto(String codigoProducto);
 
     Producto actualizar(String codigoProducto, Producto producto);
+
+    void eliminar(String codigoProducto);
+
 }
