@@ -3,9 +3,7 @@ package com.mynorsanchez.kinalapp.controller;
 import com.mynorsanchez.kinalapp.entity.Usuario;
 import com.mynorsanchez.kinalapp.service.IUsuarioService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +22,10 @@ public class UsuarioController {
         List<Usuario> usuarios = usuarioService.listarTodo();
         return ResponseEntity.ok(usuarios);
     }
+    @GetMapping("/{codigoU}")
+    public ResponseEntity<Usuario> buscarPorCodigoU(@PathVariable Long codigoU){
+        return usuarioService.buscarPorCodigoU(codigoU).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
+    
 
 }
