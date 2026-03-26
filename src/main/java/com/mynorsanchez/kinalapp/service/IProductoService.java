@@ -17,4 +17,6 @@ public interface IProductoService {
 
     void eliminar(String codigoProducto);
 
+    boolean existePorCodigoProducto (String codigoProducto);
+
 }
