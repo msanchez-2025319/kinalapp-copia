@@ -23,5 +23,16 @@ public class Producto {
     @Column
     private int estado;
 
+    public Producto(){
 
+    }
+
+    public Producto(String codigoCliente, String nombre_producto, BigDecimal precio, int stock, int estado) {
+        this.codigoCliente = codigoCliente;
+        this.nombre_producto = nombre_producto;
+        this.precio = precio;
+        this.stock = stock;
+        this.estado = estado;
+    }
+    
 }
