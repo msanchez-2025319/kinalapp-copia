@@ -11,12 +11,12 @@ List<Usuario> listarActivos();
 
 Usuario guardar (Usuario usuario);
 
-Optional<Usuario> buscarPorCodigoU(String codigoU);
+Optional<Usuario> buscarPorCodigoU(Long codigoU);
 
-Usuario actualizar(String codigoU, Usuario usuario);
+Usuario actualizar(Long codigoU, Usuario usuario);
 
-void eliminar(String codigoU);
+void eliminar(Long codigoU);
 
-boolean existePorCodigoU (String codigoU);
+boolean existePorCodigoU (Long codigoU);
 }
 
