@@ -37,4 +37,18 @@ public class UsuarioController {
         }
     }
 
+    @DeleteMapping("/{codigoU}")
+    public ResponseEntity<Void> eliminar(@PathVariable String codigoU){
+        try {
+            if (!usuarioService.existePorCodigoU(codigoU)){
+                return ResponseEntity.notFound().build();
+            }
+            usuarioService.eliminar(codigoU);
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 }
