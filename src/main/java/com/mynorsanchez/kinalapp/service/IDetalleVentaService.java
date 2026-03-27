@@ -9,4 +9,6 @@ public interface IDetalleVentaService {
     List<Producto> listarTodo();
     List<Producto> listarActivos();
 
+    Producto guardar (Producto producto);
+
 }
