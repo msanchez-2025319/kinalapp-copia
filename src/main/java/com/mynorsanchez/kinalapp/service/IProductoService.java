@@ -11,12 +11,12 @@ public interface IProductoService {
 
     Producto guardar (Producto producto);
 
-    Optional<Producto> buscarPorCodigoProducto(String codigoProducto);
+    Optional<Producto> buscarPorCodigoProducto(Long codigoProducto);
 
-    Producto actualizar(String codigoProducto, Producto producto);
+    Producto actualizar(Long codigoProducto, Producto producto);
 
-    void eliminar(String codigoProducto);
+    void eliminar(Long codigoProducto);
 
-    boolean existePorCodigoProducto (String codigoProducto);
+    boolean existePorCodigoProducto (Long codigoProducto);
 
 }
