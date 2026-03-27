@@ -18,4 +18,6 @@ public interface IDetalleVentaService {
     Producto actualizar(Long codigoDetalleVenta, DetalleVenta detalleVenta);
 
     void eliminar(Long codigoDetalleVenta);
+
+    boolean existePorCodigoDetalleVenta(Long codigoDetalleVenta);
 }
