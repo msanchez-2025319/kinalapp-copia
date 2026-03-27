@@ -46,4 +46,18 @@ public class VentaController {
             return ResponseEntity.notFound().build();
         }
     }
+    @PutMapping("/{codigoVenta}")
+    public ResponseEntity<?> actualizar(@PathVariable Long codigoVenta, @RequestBody Venta venta){
+        try {
+            if (!ventaService.existePorCodigoVenta(codigoVenta)){
+                return ResponseEntity.notFound().build();
+            }
+            Venta ventaActualizada = ventaService.actualizar(codigoVenta, venta);
+            return ResponseEntity.ok(ventaActualizada);
+        }catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }catch (RuntimeException e){
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
