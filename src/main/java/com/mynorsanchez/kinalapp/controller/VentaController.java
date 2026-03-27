@@ -34,4 +34,16 @@ public class VentaController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    @DeleteMapping("/{codigoVenta}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long codigoVenta){
+        try {
+            if (!ventaService.existePorCodigoVenta(codigoVenta)){
+                return ResponseEntity.notFound().build();
+            }
+            ventaService.eliminar(codigoVenta);
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
