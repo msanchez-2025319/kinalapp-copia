@@ -3,11 +3,9 @@ package com.mynorsanchez.kinalapp.controller;
 import com.mynorsanchez.kinalapp.entity.Usuario;
 import com.mynorsanchez.kinalapp.entity.Venta;
 import com.mynorsanchez.kinalapp.service.IVentaService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +24,14 @@ public class VentaController {
     @GetMapping("/codigoVenta")
     public ResponseEntity<Venta> buscarPorCodigoVenta(@PathVariable Long codigoVenta){
         return ventaService.buscarPorCodigoVenta(codigoVenta).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
+    @PostMapping
+    public ResponseEntity<?> guardar(@RequestBody Venta venta){
+        try {
+            Venta nuevaVenta = ventaService.guardar(venta);
+            return new ResponseEntity<>(nuevaVenta, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }
