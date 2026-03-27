@@ -3,11 +3,9 @@ package com.mynorsanchez.kinalapp.controller;
 
 import com.mynorsanchez.kinalapp.entity.Producto;
 import com.mynorsanchez.kinalapp.service.IProductoService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +26,14 @@ public class ProductoController {
     @GetMapping("/{codigoProducto}")
     public ResponseEntity<Producto> buscarPorCodigoProducto(@PathVariable Long codigoProducto){
         return productoService.buscarPorCodigoProducto(codigoProducto).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
+    @PostMapping
+    public ResponseEntity<?> guardar(@RequestBody Producto producto){
+        try {
+            Producto nuevoProducto = productoService.guardar(producto);
+            return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
+        }   catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }
