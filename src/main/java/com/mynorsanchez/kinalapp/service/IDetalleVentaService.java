@@ -8,14 +8,14 @@ import java.util.Optional;
 
 public interface IDetalleVentaService {
 
-    List<Producto> listarTodo();
-    List<Producto> listarActivos();
+    List<DetalleVenta> listarTodo();
+    List<DetalleVenta> listarActivos();
 
-    Producto guardar (Producto producto);
+    DetalleVenta guardar (DetalleVenta detalleVenta);
 
-    Optional<Producto> buscarPorCodigoDetalleVenta (Long codigoDetalleVenta);
+    Optional<DetalleVenta> buscarPorCodigoDetalleVenta (Long codigoDetalleVenta);
 
-    Producto actualizar(Long codigoDetalleVenta, DetalleVenta detalleVenta);
+    DetalleVenta actualizar(Long codigoDetalleVenta, DetalleVenta detalleVenta);
 
     void eliminar(Long codigoDetalleVenta);
 
