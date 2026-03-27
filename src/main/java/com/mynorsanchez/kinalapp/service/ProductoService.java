@@ -27,7 +27,7 @@ public class ProductoService implements IProductoService{
 
     @Override
     public List<Producto> listarActivos() {
-        return productoRepository.finByEstado(1L);
+        return productoRepository.findByEstado(1L);
     }
 
     @Override
