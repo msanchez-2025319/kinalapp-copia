@@ -16,4 +16,6 @@ public interface IDetalleVentaService {
     Optional<Producto> buscarPorCodigoDetalleVenta (Long codigoDetalleVenta);
 
     Producto actualizar(Long codigoDetalleVenta, DetalleVenta detalleVenta);
+
+    void eliminar(Long codigoDetalleVenta);
 }
