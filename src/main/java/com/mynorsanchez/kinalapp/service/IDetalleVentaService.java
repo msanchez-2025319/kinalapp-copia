@@ -1,5 +1,6 @@
 package com.mynorsanchez.kinalapp.service;
 
+import com.mynorsanchez.kinalapp.entity.DetalleVenta;
 import com.mynorsanchez.kinalapp.entity.Producto;
 
 import java.util.List;
@@ -14,4 +15,5 @@ public interface IDetalleVentaService {
 
     Optional<Producto> buscarPorCodigoDetalleVenta (Long codigoDetalleVenta);
 
+    Producto actualizar(Long codigoDetalleVenta, DetalleVenta detalleVenta);
 }
