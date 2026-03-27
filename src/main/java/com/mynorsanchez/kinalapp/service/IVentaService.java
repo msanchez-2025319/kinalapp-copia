@@ -14,4 +14,6 @@ public interface IVentaService {
     Optional<Venta> buscarPorCodigoVeta(Long codigoVenta);
 
     Venta actualizar(Long codigoVenta, Venta venta);
+
+    void eliminar(Long codigoVenta);
 }
