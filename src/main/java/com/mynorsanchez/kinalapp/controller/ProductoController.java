@@ -59,7 +59,13 @@ public class ProductoController {
         }catch (IllegalArgumentException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }catch (RuntimeException e){
-            return ResponseEntity.notFound().build()
+            return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/codigoProducto")
+    public ResponseEntity<List<Producto>> listarActivos(){
+        List<Producto> productos = productoService.listarActivos();
+        return ResponseEntity.ok(productos);
     }
 }
