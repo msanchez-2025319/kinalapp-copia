@@ -3,6 +3,7 @@ package com.mynorsanchez.kinalapp.service;
 import com.mynorsanchez.kinalapp.entity.Producto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IDetalleVentaService {
 
@@ -10,5 +11,7 @@ public interface IDetalleVentaService {
     List<Producto> listarActivos();
 
     Producto guardar (Producto producto);
+
+    Optional<Producto> buscarPorCodigoDetalleVenta (Long codigoDetalleVenta);
 
 }
