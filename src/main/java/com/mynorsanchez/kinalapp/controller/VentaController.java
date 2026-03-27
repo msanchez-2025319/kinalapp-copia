@@ -5,6 +5,7 @@ import com.mynorsanchez.kinalapp.entity.Venta;
 import com.mynorsanchez.kinalapp.service.IVentaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,5 +22,9 @@ public class VentaController {
     public ResponseEntity<List<Venta>> listar(){
         List<Venta> ventas = ventaService.listarTodo();
         return ResponseEntity.ok(ventas);
+    }
+    @GetMapping("/codigoVenta")
+    public ResponseEntity<Venta> buscarPorCodigoVenta(@PathVariable Long codigoVenta){
+        return ventaService.buscarPorCodigoVenta(codigoVenta).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 }
