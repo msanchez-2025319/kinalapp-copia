@@ -30,6 +30,16 @@ public class Venta {
     @JoinColumn(name = "Usuario_codigo_usuario")
     private Usuario usuario;
 
-    
+    public Venta(){
 
+    }
+
+    public Venta(Long codigoVenta, LocalDate fechaVenta, BigDecimal total, Long estado, Cliente cliente, Usuario usuario) {
+        this.codigoVenta = codigoVenta;
+        this.fechaVenta = fechaVenta;
+        this.total = total;
+        this.estado = estado;
+        this.cliente = cliente;
+        this.usuario = usuario;
+    }
 }
