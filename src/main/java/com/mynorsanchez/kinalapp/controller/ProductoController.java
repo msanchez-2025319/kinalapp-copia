@@ -48,4 +48,18 @@ public class ProductoController {
             return ResponseEntity.notFound().build();
         }
     }
+    @PostMapping("/codigoProducto")
+    public ResponseEntity<?> actualizar(@PathVariable Long codigoProducto, @RequestBody Producto producto){
+        try {
+            if (!productoService.existePorCodigoProducto(codigoProducto)){
+                return ResponseEntity.notFound().build();
+            }
+            Producto productoActualizado = productoService.actualizar(codigoProducto, producto);
+            return ResponseEntity.ok(productoActualizado);
+        }catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }catch (RuntimeException e){
+            return ResponseEntity.notFound().build()
+        }
+    }
 }
