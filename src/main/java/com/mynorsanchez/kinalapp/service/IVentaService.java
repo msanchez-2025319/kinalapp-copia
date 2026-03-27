@@ -16,4 +16,6 @@ public interface IVentaService {
     Venta actualizar(Long codigoVenta, Venta venta);
 
     void eliminar(Long codigoVenta);
+
+    boolean existePorCodigoVenta(Long codigoVenta);
 }
