@@ -36,4 +36,16 @@ public class ProductoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    @DeleteMapping("/{codigoProducto}")
+    public ResponseEntity<Void> elimiar(@PathVariable Long codigoProducto){
+        try {
+            if(!productoService.existePorCodigoProducto(codigoProducto)){
+                return ResponseEntity.notFound().build();
+            }
+            productoService.eliminar(codigoProducto);
+            return ResponseEntity.noContent().build();
+        }   catch (RuntimeException e){
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
