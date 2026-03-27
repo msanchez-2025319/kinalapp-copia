@@ -12,4 +12,6 @@ public interface IVentaService {
     Venta guardar (Venta venta);
 
     Optional<Venta> buscarPorCodigoVeta(Long codigoVenta);
+
+    Venta actualizar(Long codigoVenta, Venta venta);
 }
