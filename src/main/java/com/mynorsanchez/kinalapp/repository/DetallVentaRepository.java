@@ -1,4 +1,10 @@
 package com.mynorsanchez.kinalapp.repository;
 
-public interface DetallVentaRepository {
+import com.mynorsanchez.kinalapp.entity.DetalleVenta;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface DetallVentaRepository extends JpaRepository <DetalleVenta, Long> {
+    List<DetalleVenta> findByEstado(Long estado);
 }
