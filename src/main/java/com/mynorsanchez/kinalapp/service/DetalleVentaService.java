@@ -27,7 +27,7 @@ public class DetalleVentaService implements IDetalleVentaService {
     public List<DetalleVenta> listarTodo() {
         return detalleVentaRepository.findAll();
     }
-    
+
     @Override
     public DetalleVenta guardar(DetalleVenta detalleVenta) {
         validarDetalleVenta(detalleVenta);

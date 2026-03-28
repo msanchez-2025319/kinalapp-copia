@@ -60,9 +60,4 @@ public class VentaController {
             return ResponseEntity.notFound().build();
         }
     }
-    @GetMapping("/codigoVenta")
-    public ResponseEntity<List<Venta>> listarActivos(){
-        List<Venta> ventas = ventaService.listarActivos();
-        return ResponseEntity.ok(ventas);
-    }
 }
