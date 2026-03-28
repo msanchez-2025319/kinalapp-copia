@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
-@RequestMapping("/detalleVenta")
+@RequestMapping("/detalleVentas")
 public class DetalleVentaController {
     private final IDetalleVentaService detalleVentaService;
 
@@ -56,5 +58,10 @@ public class DetalleVentaController {
         } catch (RuntimeException e){
             return ResponseEntity.notFound().build();
         }
+    }
+    @GetMapping("/codigoDetalleVenta")
+    public ResponseEntity<List<DetalleVenta> > listarActivos(){
+        List<DetalleVenta> detalleVentas = detalleVentaService.listarActivos();
+        return ResponseEntity.ok(detalleVentas);
     }
 }
