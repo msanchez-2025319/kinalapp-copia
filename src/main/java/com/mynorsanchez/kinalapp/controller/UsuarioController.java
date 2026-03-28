@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usorios")
+@RequestMapping("/usuarios")
 
 public class UsuarioController {
 
@@ -70,7 +70,7 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/codigoU")
+    @GetMapping("/activos")
     public ResponseEntity<List<Usuario>> listarActivos(){
         List<Usuario> usuarios = usuarioService.listarActivos();
         return ResponseEntity.ok(usuarios);

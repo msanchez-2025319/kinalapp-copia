@@ -59,9 +59,4 @@ public class DetalleVentaController {
             return ResponseEntity.notFound().build();
         }
     }
-    @GetMapping("/codigoDetalleVenta")
-    public ResponseEntity<List<DetalleVenta> > listarActivos(){
-        List<DetalleVenta> detalleVentas = detalleVentaService.listarActivos();
-        return ResponseEntity.ok(detalleVentas);
-    }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Ventas")
+@RequestMapping("/ventas")
 public class VentaController {
     private final IVentaService ventaService;
 
@@ -59,10 +59,5 @@ public class VentaController {
         }catch (RuntimeException e){
             return ResponseEntity.notFound().build();
         }
-    }
-    @GetMapping("/codigoVenta")
-    public ResponseEntity<List<Venta>> listarActivos(){
-        List<Venta> ventas = ventaService.listarActivos();
-        return ResponseEntity.ok(ventas);
     }
 }

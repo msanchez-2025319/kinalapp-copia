@@ -9,7 +9,6 @@ import java.util.Optional;
 public interface IDetalleVentaService {
 
     List<DetalleVenta> listarTodo();
-    List<DetalleVenta> listarActivos();
 
     DetalleVenta guardar (DetalleVenta detalleVenta);
 
