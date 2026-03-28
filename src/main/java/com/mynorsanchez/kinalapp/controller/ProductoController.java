@@ -48,7 +48,7 @@ public class ProductoController {
             return ResponseEntity.notFound().build();
         }
     }
-    @PostMapping("/codigoProducto")
+    @PutMapping ("/{codigoProducto}")
     public ResponseEntity<?> actualizar(@PathVariable Long codigoProducto, @RequestBody Producto producto){
         try {
             if (!productoService.existePorCodigoProducto(codigoProducto)){
@@ -63,7 +63,7 @@ public class ProductoController {
         }
     }
 
-    @GetMapping("/codigoProducto")
+    @GetMapping("/activos")
     public ResponseEntity<List<Producto>> listarActivos(){
         List<Producto> productos = productoService.listarActivos();
         return ResponseEntity.ok(productos);

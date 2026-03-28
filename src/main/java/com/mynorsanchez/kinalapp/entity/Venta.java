@@ -1,12 +1,13 @@
 package com.mynorsanchez.kinalapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "Venta")
+@Table(name = "venta")
 public class Venta {
     @Id
     @Column (name = "codigo_venta")
@@ -24,10 +25,14 @@ public class Venta {
     /*las llaves foráneas no llevan long*/
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Clientes_dpi_cliente")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
     private Cliente cliente;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Usuario_codigo_usuario")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
     private Usuario usuario;
 
     public Venta(){
