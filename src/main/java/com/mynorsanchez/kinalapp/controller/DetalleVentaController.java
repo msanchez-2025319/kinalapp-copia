@@ -42,6 +42,19 @@ public class DetalleVentaController {
         }catch (RuntimeException e){
             return ResponseEntity.notFound().build();
         }
-
+    }
+    @PutMapping("/{codigoDetalleVenta}")
+    public  ResponseEntity<?> actualizar(@PathVariable Long codigoDetalleVenta, @RequestBody DetalleVenta detalleVenta){
+        try {
+            if (!detalleVentaService.existePorCodigoDetalleVenta(codigoDetalleVenta)){
+                return ResponseEntity.notFound().build();
+            }
+            DetalleVenta detalleVentaActualizado = detalleVentaService.actualizar(codigoDetalleVenta, detalleVenta);
+            return  ResponseEntity.ok(detalleVentaActualizado);
+        }catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (RuntimeException e){
+            return ResponseEntity.notFound().build();
+        }
     }
 }
