@@ -30,5 +30,18 @@ public class DetalleVentaController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    @DeleteMapping("/{codigoDetalleVenta}")
+    public ResponseEntity<Void> eliminar (@PathVariable Long codigoDetalleVenta){
+        try {
+            if (!detalleVentaService.existePorCodigoDetalleVenta(codigoDetalleVenta)){
+                return ResponseEntity.notFound().build();
+            }
+            detalleVentaService.eliminar(codigoDetalleVenta);
+            return ResponseEntity.noContent().build();
 
+        }catch (RuntimeException e){
+            return ResponseEntity.notFound().build();
+        }
+
+    }
 }
