@@ -1,5 +1,6 @@
 package com.mynorsanchez.kinalapp.controller;
 
+import com.mynorsanchez.kinalapp.entity.Producto;
 import com.mynorsanchez.kinalapp.service.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,4 +20,9 @@ public class ProductoViewController {
         model.addAttribute("productos", productoService.listarTodo());
         return "productos/lista";
     }
+     @GetMapping("/nuevo")
+    public String formularioNuevo(Model model) {
+        model.addAttribute("producto", new Producto());
+        return "productos/formulario";
+     }
 }
