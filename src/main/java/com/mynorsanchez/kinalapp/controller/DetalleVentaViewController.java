@@ -1,5 +1,6 @@
 package com.mynorsanchez.kinalapp.controller;
 
+import com.mynorsanchez.kinalapp.entity.DetalleVenta;
 import com.mynorsanchez.kinalapp.service.IDetalleVentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,5 +19,11 @@ public class DetalleVentaViewController {
     public String listar(Model model){
         model.addAttribute("detalle", detalleVentaService.listarTodo());
         return "detalle-venta/lista";
+    }
+
+    @GetMapping("/nuevo")
+    public String formularioNuevo(Model model){
+        model.addAttribute("detalle", new DetalleVenta());
+        return "detalle-venta/formulario";
     }
 }
