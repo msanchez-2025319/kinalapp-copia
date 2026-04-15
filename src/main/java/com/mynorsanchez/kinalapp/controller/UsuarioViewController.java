@@ -1,5 +1,6 @@
 package com.mynorsanchez.kinalapp.controller;
 
+import com.mynorsanchez.kinalapp.entity.Usuario;
 import com.mynorsanchez.kinalapp.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,11 @@ public class UsuarioViewController {
     @GetMapping
     public String listar(Model model){
         model.addAttribute("usuario", usuarioService.listarTodo());
-        return "usuario/lista";
+        return "usuario/listar";
+    }
+    @GetMapping("/nuevo")
+    public String formularioNuevo(Model model){
+        model.addAttribute("usuario", new Usuario());
+        return "usuario/formulario";
     }
 }
