@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Usuario</title>
+</head>
+<body>
+<h1>Formulario de Usuario</h1>
+<form th:action="@{/vista/usuarios/guardar}" th:object="${usuario}" method="post">
+
+    <label>Código:</label>
+    <input type="number" th:field="*{codigoUsuario}" required />
+    <br>
+
+    <label>Username:</label>
+    <input type="text" th:field="*{username}" required />
+    <br>
+
+    <label>Password:</label>
+    <input type="password" th:field="*{password}" required />
+    <br>
+
+    <label>Email:</label>
+    <input type="email" th:field="*{email}" required />
+    <br>
+
+    <label>Rol:</label>
+    <input type="text" th:field="*{rol}" />
+    <br>
+
+    <label>Estado:</label>
+    <input type="number" th:field="*{estado}" />
+    <br><br>
+
+    <button type="submit">Guardar</button>
+    <a href="/vista/usuarios">Cancelar</a>
+</form>
+</body>
+</html>
