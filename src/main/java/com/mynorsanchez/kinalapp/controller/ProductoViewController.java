@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -31,4 +32,11 @@ public class ProductoViewController {
         productoService.guardar(producto);
         return "redirect:/vista/producto";
      }
+    @GetMapping("/editar/{codigo}")
+    public String formularioEditar(@PathVariable Long codigo, Model model){
+        Producto producto = productoService.buscarPorCodigoProducto(codigo)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado" + codigo));
+        model.addAttribute("producto", producto);
+        return "producto/formulario";
+    }
 }
