@@ -70,7 +70,7 @@ public class ProductoService implements IProductoService{
     if (producto.getCodigoProducto()== null){
         throw new IllegalArgumentException("El Codigo Producto es un dato obligatorio");
     }
-    if (producto.getNombre_producto()== null || producto.getNombre_producto().trim().isEmpty()){
+    if (producto.getNombreProducto()== null || producto.getNombreProducto().trim().isEmpty()){
         throw new IllegalArgumentException("El nombre es un dato obligatorio");
 
     }
