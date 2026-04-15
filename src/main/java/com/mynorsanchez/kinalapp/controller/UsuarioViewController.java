@@ -5,10 +5,7 @@ import com.mynorsanchez.kinalapp.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/vista/usuario")
@@ -30,5 +27,12 @@ public class UsuarioViewController {
     public String guardar(@ModelAttribute Usuario usuario){
         usuarioService.guardar(usuario);
         return "redirect:/vista/usuario";
+    }
+    @GetMapping("/editar/{codigo}")
+    public String formularioEditar(@PathVariable Long codigo, Model model){
+        Usuario usuario = usuarioService.buscarPorCodigoU(codigo)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado: "+ codigo));
+        model.addAttribute("usuario", usuario);
+        return "usuario/formulario";
     }
 }
