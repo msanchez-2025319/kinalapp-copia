@@ -5,10 +5,7 @@ import com.mynorsanchez.kinalapp.service.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/vista/producto")
@@ -27,7 +24,7 @@ public class ProductoViewController {
         model.addAttribute("producto", new Producto());
         return "productos/formulario";
      }
-     @GetMapping("/guardar")
+     @PostMapping("/guardar")
     public String guardar(@ModelAttribute Producto producto){
         productoService.guardar(producto);
         return "redirect:/vista/producto";
@@ -37,7 +34,7 @@ public class ProductoViewController {
         Producto producto = productoService.buscarPorCodigoProducto(codigo)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado" + codigo));
         model.addAttribute("producto", producto);
-        return "producto/formulario";
+        return "productos/formulario";
     }
     @GetMapping("/eliminar/{codigo}")
     public String eliminar(@PathVariable Long codigo){

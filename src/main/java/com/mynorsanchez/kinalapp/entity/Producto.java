@@ -12,10 +12,10 @@ import java.math.BigDecimal;
 
 public class Producto {
     @Id
-    @Column (name = "codigo_producto")
+    @Column (name = "codigoProducto")
     private Long codigoProducto;
     @Column
-    private  String nombre_producto;
+    private  String nombreProducto;
     @Column(precision = 10, scale = 2)
     private BigDecimal precio;
     @Column
@@ -27,9 +27,9 @@ public class Producto {
 
     }
 
-    public Producto(Long codigoProducto, String nombre_producto, BigDecimal precio, Long stock, Long estado) {
+    public Producto(Long codigoProducto, String nombreProducto, BigDecimal precio, Long stock, Long estado) {
         this.codigoProducto = codigoProducto;
-        this.nombre_producto = nombre_producto;
+        this.nombreProducto = nombreProducto;
         this.precio = precio;
         this.stock = stock;
         this.estado = estado;
@@ -43,12 +43,12 @@ public class Producto {
         this.codigoProducto = codigoProducto;
     }
 
-    public String getNombre_producto() {
-        return nombre_producto;
+    public String getNombreProducto() {
+        return nombreProducto;
     }
 
-    public void setNombre_producto(String nombre_producto) {
-        this.nombre_producto = nombre_producto;
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
     }
 
     public BigDecimal getPrecio() {
