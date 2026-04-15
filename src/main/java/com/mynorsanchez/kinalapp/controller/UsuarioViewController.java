@@ -35,4 +35,9 @@ public class UsuarioViewController {
         model.addAttribute("usuario", usuario);
         return "usuario/formulario";
     }
+    @GetMapping("/eliminar/{codigo}")
+    public String eliminar(@PathVariable Long codigo){
+        usuarioService.eliminar(codigo);
+        return "redirect:/vista/usuario";
+    }
 }
