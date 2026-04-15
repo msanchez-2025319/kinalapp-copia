@@ -1,6 +1,7 @@
 package com.mynorsanchez.kinalapp.controller;
 
 import com.mynorsanchez.kinalapp.entity.DetalleVenta;
+import com.mynorsanchez.kinalapp.entity.Producto;
 import com.mynorsanchez.kinalapp.service.IDetalleVentaService;
 
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,13 @@ public class DetalleVentaController {
 
     public DetalleVentaController(IDetalleVentaService detalleVentaService) {
         this.detalleVentaService = detalleVentaService;
+    }
+
+
+    @GetMapping
+    public ResponseEntity<List<DetalleVenta>> listar(){
+        List<DetalleVenta> detalleVentas = detalleVentaService.listarTodo();
+        return ResponseEntity.ok(detalleVentas);
     }
 
     @GetMapping("/{codigoDetalleVenta}")
