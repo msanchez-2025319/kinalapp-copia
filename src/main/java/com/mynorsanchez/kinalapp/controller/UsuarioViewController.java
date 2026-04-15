@@ -8,36 +8,41 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/vista/usuario")
+@RequestMapping("/vista/usuarios")
 public class UsuarioViewController {
+
     @Autowired
     private IUsuarioService usuarioService;
 
     @GetMapping
-    public String listar(Model model){
-        model.addAttribute("usuario", usuarioService.listarTodo());
-        return "usuario/listar";
+    public String listar(Model model) {
+        model.addAttribute("usuarios", usuarioService.listarTodo());
+        return "usuarios/lista";
     }
+
     @GetMapping("/nuevo")
-    public String formularioNuevo(Model model){
+    public String formularioNuevo(Model model) {
         model.addAttribute("usuario", new Usuario());
-        return "usuario/formulario";
+        return "usuarios/formulario";
     }
+
     @PostMapping("/guardar")
-    public String guardar(@ModelAttribute Usuario usuario){
+    public String guardar(@ModelAttribute Usuario usuario) {
         usuarioService.guardar(usuario);
-        return "redirect:/vista/usuario";
+        return "redirect:/vista/usuarios";
     }
+
     @GetMapping("/editar/{codigo}")
-    public String formularioEditar(@PathVariable Long codigo, Model model){
+    public String formularioEditar(@PathVariable Long codigo, Model model) {
         Usuario usuario = usuarioService.buscarPorCodigoU(codigo)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado: "+ codigo));
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado: " + codigo));
         model.addAttribute("usuario", usuario);
-        return "usuario/formulario";
+        return "usuarios/formulario";
     }
+
     @GetMapping("/eliminar/{codigo}")
-    public String eliminar(@PathVariable Long codigo){
+    public String eliminar(@PathVariable Long codigo) {
         usuarioService.eliminar(codigo);
-        return "redirect:/vista/usuario";
+        return "redirect:/vista/usuarios";
     }
 }
