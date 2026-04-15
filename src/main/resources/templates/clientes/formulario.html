@@ -2,29 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Formulario Producto</title>
+    <title>Formulario Cliente</title>
 </head>
 <body>
+<h1>Formulario de Cliente</h1>
+<form th:action="@{/vista/clientes/guardar}" th:object="${cliente}" method="post">
 
-<h1>Formulario de Producto</h1>
-
-<form th:action="@{/vista/producto/guardar}" th:object="${producto}" method="post">
-
-    <label>Código:</label>
-    <input type="number" th:field="*{codigoProducto}" required />
+    <label>DPI:</label>
+    <input type="text" th:field="*{DPICliente}" required />
     <br>
 
     <label>Nombre:</label>
-    <!-- ✅ CORREGIDO -->
-    <input type="text" th:field="*{nombreProducto}" required />
+    <input type="text" th:field="*{nombreCliente}" required />
     <br>
 
-    <label>Precio:</label>
-    <input type="number" step="0.01" th:field="*{precio}" required />
+    <label>Apellido:</label>
+    <input type="text" th:field="*{apellidoCliente}" required />
     <br>
 
-    <label>Stock:</label>
-    <input type="number" th:field="*{stock}" required />
+    <label>Dirección:</label>
+    <input type="text" th:field="*{direccion}" />
     <br>
 
     <label>Estado:</label>
@@ -32,9 +29,7 @@
     <br><br>
 
     <button type="submit">Guardar</button>
-    <a th:href="@{/vista/producto}">Cancelar</a>
-
+    <a href="/vista/clientes">Cancelar</a>
 </form>
-
 </body>
 </html>
