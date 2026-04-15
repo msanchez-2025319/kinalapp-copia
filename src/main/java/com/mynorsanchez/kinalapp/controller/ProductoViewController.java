@@ -39,4 +39,9 @@ public class ProductoViewController {
         model.addAttribute("producto", producto);
         return "producto/formulario";
     }
+    @GetMapping("/eliminar/{codigo}")
+    public String eliminar(@PathVariable Long codigo){
+        productoService.eliminar(codigo);
+        return "redirect:/vista/productos";
+    }
 }
