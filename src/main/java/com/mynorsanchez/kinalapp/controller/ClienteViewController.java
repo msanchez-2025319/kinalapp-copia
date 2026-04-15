@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/vista/cliente")
+@RequestMapping("/vista/clientes")
 public class ClienteViewController {
 
     @Autowired
@@ -17,7 +17,7 @@ public class ClienteViewController {
 
     @GetMapping
     public String listar(Model model){
-        model.addAttribute("clientes",clientesService.listarActivos());
+        model.addAttribute("clientes",clientesService.listarTodos());
         return "clientes/lista";
     }
     @GetMapping("/nuevo")
