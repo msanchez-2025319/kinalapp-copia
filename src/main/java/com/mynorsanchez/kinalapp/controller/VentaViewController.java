@@ -1,4 +1,4 @@
-package com.mynorsanchez.kinalapp.view;
+package com.mynorsanchez.kinalapp.controller;
 
 import com.mynorsanchez.kinalapp.entity.Venta;
 import com.mynorsanchez.kinalapp.service.IVentaService;
