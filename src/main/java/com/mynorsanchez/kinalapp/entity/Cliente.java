@@ -1,31 +1,38 @@
 package com.mynorsanchez.kinalapp.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "clientes")
-
 public class Cliente {
     @Id
-    @Column (name = "dpi_cliente")
+    @Column(name = "dpi_cliente")
     private String DPICliente;
-    @Column
+
+    @Column(name = "nombre_cliente")
     private String nombreCliente;
-    @Column
+
+    @Column(name = "apellido_cliente")
     private String apellidoCliente;
+
     @Column
     private String direccion;
+
     @Column
-    private int estado;
+    private Integer estado;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"cliente", "hibernateLazyInitializer", "handler"})
+    private List<Venta> ventas = new ArrayList<>();
 
     public Cliente() {
     }
 
-
-    public Cliente(String DPICliente, String nombreCliente, String apellidoCliente, String direccion, int estado) {
+    public Cliente(String DPICliente, String nombreCliente, String apellidoCliente, String direccion, Integer estado) {
         this.DPICliente = DPICliente;
         this.nombreCliente = nombreCliente;
         this.apellidoCliente = apellidoCliente;
@@ -65,11 +72,19 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public int getEstado() {
+    public Integer getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(Integer estado) {
         this.estado = estado;
+    }
+
+    public List<Venta> getVentas() {
+        return ventas;
+    }
+
+    public void setVentas(List<Venta> ventas) {
+        this.ventas = ventas;
     }
 }

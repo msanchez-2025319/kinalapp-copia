@@ -5,15 +5,18 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "venta")
 public class Venta {
     @Id
-    @Column (name = "codigo_venta")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo_venta")
     private Long codigoVenta;
 
-    @Column
+    @Column(name = "fecha_venta")
     private LocalDate fechaVenta;
 
     @Column(precision = 10, scale = 2)
@@ -22,30 +25,23 @@ public class Venta {
     @Column
     private Long estado;
 
-    /*las llaves foráneas no llevan long*/
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Clientes_dpi_cliente")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-
     private Cliente cliente;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Usuario_codigo_usuario")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-
     private Usuario usuario;
 
-    public Venta(){
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"venta", "hibernateLazyInitializer", "handler"})
+    private List<DetalleVenta> detallesVenta = new ArrayList<>();
 
-    }
-
-    public Venta(Long codigoVenta, LocalDate fechaVenta, BigDecimal total, Long estado, Cliente cliente, Usuario usuario) {
-        this.codigoVenta = codigoVenta;
-        this.fechaVenta = fechaVenta;
-        this.total = total;
-        this.estado = estado;
-        this.cliente = cliente;
-        this.usuario = usuario;
+    public Venta() {
+        this.fechaVenta = LocalDate.now();
+        this.estado = 1L;
     }
 
     public Long getCodigoVenta() {
@@ -94,5 +90,13 @@ public class Venta {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public List<DetalleVenta> getDetallesVenta() {
+        return detallesVenta;
+    }
+
+    public void setDetallesVenta(List<DetalleVenta> detallesVenta) {
+        this.detallesVenta = detallesVenta;
     }
 }
