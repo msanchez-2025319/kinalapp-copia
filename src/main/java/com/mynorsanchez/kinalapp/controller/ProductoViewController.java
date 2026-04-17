@@ -39,6 +39,6 @@ public class ProductoViewController {
     @GetMapping("/eliminar/{codigo}")
     public String eliminar(@PathVariable Long codigo){
         productoService.eliminar(codigo);
-        return "redirect:/vista/productos";
+        return "redirect:/vista/producto";
     }
 }

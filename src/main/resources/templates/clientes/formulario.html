@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" th:href="@{/Style.css}">
 <head>
     <meta charset="UTF-8">
     <title>Formulario Cliente</title>
+    <link rel="stylesheet" th:href="@{/Style.css}">
 </head>
+
 <body>
+
+<a href="/dashboard">← regreso módulo de gestión</a>
+
 <h1>Formulario de Cliente</h1>
+
 <form th:action="@{/vista/clientes/guardar}" th:object="${cliente}" method="post">
 
     <label>DPI:</label>
@@ -26,11 +31,17 @@
     <br>
 
     <label>Estado:</label>
-    <input type="number" th:field="*{estado}" />
+    <select th:field="*{estado}" required>
+        <option value="1">Activo</option>
+        <option value="0">Inactivo</option>
+    </select>
+
     <br><br>
 
     <button type="submit">Guardar</button>
-    <a href="/vista/clientes">Cancelar</a>
+    <a th:href="@{/vista/clientes}">Cancelar</a>
+
 </form>
+
 </body>
 </html>
