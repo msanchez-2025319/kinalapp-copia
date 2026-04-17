@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/Login.css">
+
+<head>
+    <title>Login</title>
+</head>
+<body>
+<h2>Iniciar Sesión</h2>
+
+<div th:if="${param.registered}" style="color:green">
+    Registro exitoso. Por favor inicia sesión.
+</div>
+<div th:if="${param.logout}" style="color:blue">
+    Sesión cerrada exitosamente.
+</div>
+<div th:if="${error}" th:text="${error}" style="color:red"></div>
+
+<form method="post" action="/login">
+    <div>
+        <label>Email:</label>
+        <input type="email" name="email" required>
+    </div>
+    <div>
+        <label>Contraseña:</label>
+        <input type="password" name="password" required>
+    </div>
+    <button type="submit">Ingresar</button>
+</form>
+<a href="/register">Registrarse</a>
+</body>
+</html>
