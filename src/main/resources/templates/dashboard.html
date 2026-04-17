@@ -2,14 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Dashboard</title>
-    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/Style.css">
+
 </head>
 <body>
+
 <div class="navbar">
     <div class="logo">KinalApp</div>
     <div class="user-info">
-        <span class="user-name">Bienvenido, <span th:text="${session.loginUser.fullName}"></span></span>
-        <a href="/logout" class="logout-btn">Cerrar Sesion</a>
+        <span class="user-name">
+            Bienvenido,
+            <span th:text="${session.loginUser.fullName}"></span>
+        </span>
+        <a th:href="@{/logout}" class="logout-btn">Cerrar Sesion</a>
     </div>
 </div>
 
@@ -20,46 +25,49 @@
     </div>
 
     <div class="modules">
+
         <div class="module-card">
             <div class="module-title">Clientes</div>
             <div class="module-links">
-                <a href="/vista/clientes/nuevo" class="btn btn-form">Nuevo</a>
-                <a href="/vista/clientes" class="btn btn-list">Lista</a>
+                <a th:href="@{/vista/clientes/nuevo}" class="btn btn-form">Nuevo</a>
+                <a th:href="@{/vista/clientes}" class="btn btn-list">Lista</a>
             </div>
         </div>
 
         <div class="module-card">
             <div class="module-title">Productos</div>
             <div class="module-links">
-                <a href="/vista/producto/nuevo" class="btn btn-form">Nuevo</a>
-                <a href="/vista/producto" class="btn btn-list">Lista</a>
+                <a th:href="@{/vista/producto/nuevo}" class="btn btn-form">Nuevo</a>
+                <a th:href="@{/vista/producto}" class="btn btn-list">Lista</a>
             </div>
         </div>
 
         <div class="module-card">
             <div class="module-title">Usuarios</div>
             <div class="module-links">
-                <a href="/vista/usuarios/nuevo" class="btn btn-form">Nuevo</a>
-                <a href="/vista/usuarios" class="btn btn-list">Lista</a>
+                <a th:href="@{/vista/usuarios/nuevo}" class="btn btn-form">Nuevo</a>
+                <a th:href="@{/vista/usuarios}" class="btn btn-list">Lista</a>
             </div>
         </div>
 
         <div class="module-card">
             <div class="module-title">Ventas</div>
             <div class="module-links">
-                <a href="/vista/ventas/nuevo" class="btn btn-form">Nuevo</a>
-                <a href="/vista/ventas" class="btn btn-list">Lista</a>
+                <a th:href="@{/vista/ventas/nuevo}" class="btn btn-form">Nuevo</a>
+                <a th:href="@{/vista/ventas}" class="btn btn-list">Lista</a>
             </div>
         </div>
 
         <div class="module-card">
             <div class="module-title">Detalle Venta</div>
             <div class="module-links">
-                <a href="/vista/detalle-venta/nuevo" class="btn btn-form">Nuevo</a>
-                <a href="/vista/detalle-venta" class="btn btn-list">Lista</a>
+                <a th:href="@{/vista/detalle-venta/nuevo}" class="btn btn-form">Nuevo</a>
+                <a th:href="@{/vista/detalle-venta}" class="btn btn-list">Lista</a>
             </div>
         </div>
+
     </div>
 </div>
+
 </body>
 </html>

@@ -5,7 +5,10 @@
     <title>Formulario Producto</title>
     <link rel="stylesheet" th:href="@{/Style.css}">
 </head>
+
 <body>
+
+<a href="/dashboard">← regreso a módulo de gestión</a>
 
 <h1>Formulario de Producto</h1>
 
@@ -28,7 +31,11 @@
     <br>
 
     <label>Estado:</label>
-    <input type="number" th:field="*{estado}" />
+    <select th:field="*{estado}" required>
+        <option value="1">Activo</option>
+        <option value="0">Inactivo</option>
+    </select>
+
     <br><br>
 
     <button type="submit">Guardar</button>

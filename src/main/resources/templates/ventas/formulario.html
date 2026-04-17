@@ -5,8 +5,13 @@
     <title>Formulario Venta</title>
     <link rel="stylesheet" th:href="@{/Style.css}">
 </head>
+
 <body>
+
+<a href="/dashboard">← regreso a módulo de gestión</a>
+
 <h1>Formulario de Venta</h1>
+
 <form th:action="@{/vista/ventas/guardar}" th:object="${venta}" method="post">
 
     <label>Código:</label>
@@ -22,11 +27,17 @@
     <br>
 
     <label>Estado:</label>
-    <input type="number" th:field="*{estado}" />
+    <select th:field="*{estado}" required>
+        <option value="1">Activo</option>
+        <option value="0">Inactivo</option>
+    </select>
+
     <br><br>
 
     <button type="submit">Guardar</button>
-    <a href="/vista/ventas">Cancelar</a>
+    <a th:href="@{/vista/ventas}">Cancelar</a>
+
 </form>
+
 </body>
 </html>

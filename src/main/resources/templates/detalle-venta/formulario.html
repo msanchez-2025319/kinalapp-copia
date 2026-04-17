@@ -5,8 +5,13 @@
     <title>Formulario Detalle Venta</title>
     <link rel="stylesheet" th:href="@{/Style.css}">
 </head>
+
 <body>
+
+<a href="/dashboard">← regreso a módulo de gestión</a>
+
 <h1>Formulario de Detalle Venta</h1>
+
 <form th:action="@{/vista/detalle-venta/guardar}" th:object="${detalle}" method="post">
 
     <label>Código:</label>
@@ -23,10 +28,16 @@
 
     <label>Subtotal:</label>
     <input type="number" step="0.01" th:field="*{subtotal}" required />
+    <br>
+
+    <!-- Las líneas de ESTADO fueron ELIMINADAS -->
+
     <br><br>
 
     <button type="submit">Guardar</button>
-    <a href="/vista/detalle-venta">Cancelar</a>
+    <a th:href="@{/vista/detalle-venta}">Cancelar</a>
+
 </form>
+
 </body>
 </html>
