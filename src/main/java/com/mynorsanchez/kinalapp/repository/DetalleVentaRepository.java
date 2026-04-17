@@ -2,9 +2,11 @@ package com.mynorsanchez.kinalapp.repository;
 
 import com.mynorsanchez.kinalapp.entity.DetalleVenta;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
-
-public interface DetalleVentaRepository extends JpaRepository <DetalleVenta, Long> {
-
+@Repository
+public interface DetalleVentaRepository extends JpaRepository<DetalleVenta, Long> {
+    List<DetalleVenta> findByVentaCodigoVenta(Long codigoVenta);
 }
