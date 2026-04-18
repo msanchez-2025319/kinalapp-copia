@@ -1,4 +1,3 @@
-
 package com.mynorsanchez.kinalapp.service;
 
 import com.mynorsanchez.kinalapp.entity.Venta;
@@ -26,6 +25,7 @@ public class VentaService implements IVentaService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Venta> listarActivos() {
         return ventaRepository.findByEstado(1L);
     }
@@ -45,7 +45,7 @@ public class VentaService implements IVentaService {
     @Override
     public Venta actualizar(Long codigoVenta, Venta venta) {
         if (!ventaRepository.existsById(codigoVenta)) {
-            throw new RuntimeException("No se encontró la venta con código: " + codigoVenta);
+            throw new IllegalArgumentException("No se encontró la venta con código: " + codigoVenta);
         }
         venta.setCodigoVenta(codigoVenta);
         validarVenta(venta);
@@ -55,29 +55,29 @@ public class VentaService implements IVentaService {
     @Override
     public void eliminar(Long codigoVenta) {
         if (!ventaRepository.existsById(codigoVenta)) {
-            throw new RuntimeException("No se encontró la venta con código: " + codigoVenta);
+            throw new IllegalArgumentException("No se encontró la venta con código: " + codigoVenta);
         }
         ventaRepository.deleteById(codigoVenta);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean existePorCodigoVenta(Long codigoVenta) {
         return ventaRepository.existsById(codigoVenta);
     }
 
     private void validarVenta(Venta venta) {
         if (venta.getFechaVenta() == null) {
-            throw new IllegalArgumentException("La fecha de venta es obligatoria");
+            throw new IllegalArgumentException("La fecha de venta es obligatoria.");
         }
         if (venta.getEstado() == null) {
-            throw new IllegalArgumentException("El estado es obligatorio");
+            throw new IllegalArgumentException("El estado es obligatorio.");
         }
         if (venta.getCliente() == null) {
-            throw new IllegalArgumentException("El cliente es obligatorio");
+            throw new IllegalArgumentException("El cliente es obligatorio.");
         }
         if (venta.getUsuario() == null) {
-            throw new IllegalArgumentException("El usuario es obligatorio");
+            throw new IllegalArgumentException("El usuario es obligatorio.");
         }
-
     }
 }

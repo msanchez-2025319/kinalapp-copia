@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Formulario Venta</title>
@@ -8,47 +8,93 @@
 
 <body>
 
-<a href="/dashboard">← regreso a módulo de gestión</a>
+<a href="/dashboard">Regresar al modulo de gestion</a>
 
-<h1>Formulario de Venta</h1>
+<h1 th:text="${venta.codigoVenta != null} ? 'Editar Venta' : 'Nueva Venta'">Formulario Venta</h1>
 
-<form th:action="@{/vista/ventas/guardar}" th:object="${venta}" method="post">
+<div th:if="${exito}" th:text="${exito}" style="color: green;"></div>
+<div th:if="${error}" th:text="${error}" style="color: red;"></div>
 
-    <input type="hidden" th:field="*{codigoVenta}" />
+<form th:if="${venta.codigoVenta == null}"
+      th:action="@{/vista/ventas/guardar}"
+      th:object="${venta}"
+      method="post">
 
-    <label>Fecha:</label>
-    <input type="date" th:field="*{fechaVenta}" required />
+    <label for="fechaVenta">Fecha:</label>
+    <input id="fechaVenta" type="date" th:field="*{fechaVenta}" required />
     <br>
 
-    <label>Total:</label>
-    <input type="number" step="0.01" th:field="*{total}" required />
+    <label for="total">Total:</label>
+    <input id="total" type="number" step="0.01" th:field="*{total}" min="0" required />
     <br>
 
-    <label>Cliente:</label>
-    <select name="dpiCliente" required>
-        <option value="">Seleccione cliente</option>
+    <label for="dpiCliente">Cliente:</label>
+    <select id="dpiCliente" name="dpiCliente" required>
+        <option value="">-- Seleccione un cliente --</option>
+        <option th:each="c : ${clientes}"
+                th:value="${c.DPICliente}"
+                th:text="${c.nombreCliente + ' ' + c.apellidoCliente}">
+        </option>
+    </select>
+    <br>
+
+    <label for="codigoUsuario">Usuario:</label>
+    <select id="codigoUsuario" name="codigoUsuario" required>
+        <option value="">-- Seleccione un usuario --</option>
+        <option th:each="u : ${usuarios}"
+                th:value="${u.codigoUsuario}"
+                th:text="${u.username}">
+        </option>
+    </select>
+    <br>
+
+    <input type="hidden" name="estado" value="1" />
+    <br>
+
+    <button type="submit">Guardar</button>
+    <a th:href="@{/vista/ventas}">Cancelar</a>
+
+</form>
+
+<form th:if="${venta.codigoVenta != null}"
+      th:action="@{/vista/ventas/actualizar/{codigo}(codigo=${venta.codigoVenta})}"
+      th:object="${venta}"
+      method="post">
+
+    <label for="fechaVentaEdit">Fecha:</label>
+    <input id="fechaVentaEdit" type="date" th:field="*{fechaVenta}" required />
+    <br>
+
+    <label for="totalEdit">Total:</label>
+    <input id="totalEdit" type="number" step="0.01" th:field="*{total}" min="0" required />
+    <br>
+
+    <label for="dpiClienteEdit">Cliente:</label>
+    <select id="dpiClienteEdit" name="dpiCliente" required>
+        <option value="">-- Seleccione un cliente --</option>
         <option th:each="c : ${clientes}"
                 th:value="${c.DPICliente}"
                 th:text="${c.nombreCliente + ' ' + c.apellidoCliente}"
                 th:selected="${venta.cliente != null && venta.cliente.DPICliente == c.DPICliente}">
         </option>
     </select>
-    <br><br>
+    <br>
 
-    <label>Usuario:</label>
-    <select name="codigoUsuario" required>
-        <option value="">Seleccione usuario</option>
+    <label for="codigoUsuarioEdit">Usuario:</label>
+    <select id="codigoUsuarioEdit" name="codigoUsuario" required>
+        <option value="">-- Seleccione un usuario --</option>
         <option th:each="u : ${usuarios}"
                 th:value="${u.codigoUsuario}"
                 th:text="${u.username}"
                 th:selected="${venta.usuario != null && venta.usuario.codigoUsuario == u.codigoUsuario}">
         </option>
     </select>
-    <br><br>
+    <br>
 
-    <input type="hidden" th:field="*{estado}" value="1" />
+    <input type="hidden" th:field="*{estado}" />
+    <br>
 
-    <button type="submit">Guardar</button>
+    <button type="submit">Actualizar</button>
     <a th:href="@{/vista/ventas}">Cancelar</a>
 
 </form>

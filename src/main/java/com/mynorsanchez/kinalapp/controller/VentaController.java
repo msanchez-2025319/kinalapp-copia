@@ -2,6 +2,7 @@ package com.mynorsanchez.kinalapp.controller;
 
 import com.mynorsanchez.kinalapp.entity.Venta;
 import com.mynorsanchez.kinalapp.service.IVentaService;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,9 @@ public class VentaController {
     @GetMapping
     public ResponseEntity<List<Venta>> listar() {
         List<Venta> ventas = ventaService.listarTodo();
+        if (ventas.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.ok(ventas);
     }
 
@@ -38,16 +42,30 @@ public class VentaController {
             return new ResponseEntity<>(nuevaVenta, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("Error de integridad: datos duplicados o inválidos.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error interno al guardar la venta.");
         }
     }
 
     @DeleteMapping("/{codigoVenta}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long codigoVenta) {
-        if (!ventaService.existePorCodigoVenta(codigoVenta)) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> eliminar(@PathVariable Long codigoVenta) {
+        try {
+            if (!ventaService.existePorCodigoVenta(codigoVenta)) {
+                return ResponseEntity.notFound().build();
+            }
+            ventaService.eliminar(codigoVenta);
+            return ResponseEntity.noContent().build();
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("No se puede eliminar: la venta tiene registros relacionados.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error interno al eliminar la venta.");
         }
-        ventaService.eliminar(codigoVenta);
-        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{codigoVenta}")
@@ -60,6 +78,12 @@ public class VentaController {
             return ResponseEntity.ok(ventaActualizada);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("Error de integridad al actualizar la venta.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error interno al actualizar la venta.");
         }
     }
 }

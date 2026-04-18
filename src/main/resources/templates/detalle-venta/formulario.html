@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Formulario Detalle Venta</title>
@@ -8,33 +8,95 @@
 
 <body>
 
-<a href="/dashboard">← regreso a módulo de gestión</a>
+<a href="/dashboard">Regresar al modulo de gestion</a>
 
-<h1>Formulario de Detalle Venta</h1>
+<h1 th:text="${detalle.codigoDetalleVenta != null} ? 'Editar Detalle Venta' : 'Nuevo Detalle Venta'">Formulario</h1>
 
-<form th:action="@{/vista/detalle-venta/guardar}" th:object="${detalle}" method="post">
+<div th:if="${exito}" th:text="${exito}" style="color: green;"></div>
+<div th:if="${error}" th:text="${error}" style="color: red;"></div>
 
-    <label>Código:</label>
-    <input type="number" th:field="*{codigoDetalleVenta}" required />
+<!-- Formulario para NUEVO -->
+<form th:if="${detalle.codigoDetalleVenta == null}"
+      th:action="@{/vista/detalle-venta/guardar}"
+      th:object="${detalle}"
+      method="post">
+
+    <label for="cantidad">Cantidad:</label>
+    <input id="cantidad" type="number" th:field="*{cantidad}" min="1" required />
     <br>
 
-    <label>Cantidad:</label>
-    <input type="number" th:field="*{cantidad}" required />
+    <label for="precioUnitario">Precio Unitario:</label>
+    <input id="precioUnitario" type="number" step="0.01" th:field="*{precioUnitario}" min="0.01" required />
     <br>
 
-    <label>Precio Unitario:</label>
-    <input type="number" step="0.01" th:field="*{precioUnitario}" required />
+    <label for="subtotal">Subtotal:</label>
+    <input id="subtotal" type="number" step="0.01" th:field="*{subtotal}" min="0.01" required />
     <br>
 
-    <label>Subtotal:</label>
-    <input type="number" step="0.01" th:field="*{subtotal}" required />
+    <label for="producto">Producto:</label>
+    <select id="producto" th:field="*{producto.codigoProducto}" required>
+        <option value="">-- Seleccione un producto --</option>
+        <option th:each="p : ${productos}"
+                th:value="${p.codigoProducto}"
+                th:text="${p.nombre}">
+        </option>
+    </select>
     <br>
 
-    <!-- Las líneas de ESTADO fueron ELIMINADAS -->
-
+    <label for="venta">Venta:</label>
+    <select id="venta" th:field="*{venta.codigoVenta}" required>
+        <option value="">-- Seleccione una venta --</option>
+        <option th:each="v : ${ventas}"
+                th:value="${v.codigoVenta}"
+                th:text="${v.codigoVenta}">
+        </option>
+    </select>
     <br><br>
 
     <button type="submit">Guardar</button>
+    <a th:href="@{/vista/detalle-venta}">Cancelar</a>
+
+</form>
+
+<!-- Formulario para EDITAR -->
+<form th:if="${detalle.codigoDetalleVenta != null}"
+      th:action="@{/vista/detalle-venta/actualizar/{id}(id=${detalle.codigoDetalleVenta})}"
+      th:object="${detalle}"
+      method="post">
+
+    <label for="cantidadEdit">Cantidad:</label>
+    <input id="cantidadEdit" type="number" th:field="*{cantidad}" min="1" required />
+    <br>
+
+    <label for="precioUnitarioEdit">Precio Unitario:</label>
+    <input id="precioUnitarioEdit" type="number" step="0.01" th:field="*{precioUnitario}" min="0.01" required />
+    <br>
+
+    <label for="subtotalEdit">Subtotal:</label>
+    <input id="subtotalEdit" type="number" step="0.01" th:field="*{subtotal}" min="0.01" required />
+    <br>
+
+    <label for="productoEdit">Producto:</label>
+    <select id="productoEdit" th:field="*{producto.codigoProducto}" required>
+        <option value="">-- Seleccione un producto --</option>
+        <option th:each="p : ${productos}"
+                th:value="${p.codigoProducto}"
+                th:text="${p.nombre}">
+        </option>
+    </select>
+    <br>
+
+    <label for="ventaEdit">Venta:</label>
+    <select id="ventaEdit" th:field="*{venta.codigoVenta}" required>
+        <option value="">-- Seleccione una venta --</option>
+        <option th:each="v : ${ventas}"
+                th:value="${v.codigoVenta}"
+                th:text="${v.codigoVenta}">
+        </option>
+    </select>
+    <br><br>
+
+    <button type="submit">Actualizar</button>
     <a th:href="@{/vista/detalle-venta}">Cancelar</a>
 
 </form>
