@@ -23,12 +23,12 @@ public class DetalleVenta {
     private BigDecimal subtotal;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Producto_codigo_producto", nullable = false)
+    @JoinColumn(name = "producto_codigo_producto", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Producto producto;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Ventas_codigo_venta", nullable = false)
+    @JoinColumn(name = "ventas_codigo_venta", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Venta venta;
 
