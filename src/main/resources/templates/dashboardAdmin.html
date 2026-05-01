@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="/Style.css">
-
+    <title>Dashboard Admin</title>
+    <link rel="stylesheet" href="/css/Style.css">
 </head>
 <body>
 
 <div class="navbar">
     <div class="logo">KinalApp</div>
     <div class="user-info">
-        <span class="user-name">
-            Bienvenido,
-            <span th:text="${session.loginUser.fullName}"></span>
-        </span>
-        <a th:href="@{/logout}" class="logout-btn">Cerrar Sesion</a>
+        <span class="user-name">Bienvenido, <span th:text="${username}"></span></span>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="logout-btn">Cerrar Sesion</button>
+        </form>
     </div>
 </div>
 
 <div class="container">
     <div class="welcome">
-        <h2>Panel de Control</h2>
+        <h2>Panel de Control - Administrador</h2>
         <p>Seleccione un modulo para gestionar</p>
     </div>
 
