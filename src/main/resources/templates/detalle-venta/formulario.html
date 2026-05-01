@@ -15,7 +15,6 @@
 <div th:if="${exito}" th:text="${exito}" style="color: green;"></div>
 <div th:if="${error}" th:text="${error}" style="color: red;"></div>
 
-<!-- Formulario para NUEVO -->
 <form th:if="${detalle.codigoDetalleVenta == null}"
       th:action="@{/vista/detalle-venta/guardar}"
       th:object="${detalle}"
@@ -38,7 +37,7 @@
         <option value="">-- Seleccione un producto --</option>
         <option th:each="p : ${productos}"
                 th:value="${p.codigoProducto}"
-                th:text="${p.nombre}">
+                th:text="${p.nombreProducto}">
         </option>
     </select>
     <br>
@@ -58,7 +57,6 @@
 
 </form>
 
-<!-- Formulario para EDITAR -->
 <form th:if="${detalle.codigoDetalleVenta != null}"
       th:action="@{/vista/detalle-venta/actualizar/{id}(id=${detalle.codigoDetalleVenta})}"
       th:object="${detalle}"
@@ -81,7 +79,7 @@
         <option value="">-- Seleccione un producto --</option>
         <option th:each="p : ${productos}"
                 th:value="${p.codigoProducto}"
-                th:text="${p.nombre}">
+                th:text="${p.nombreProducto}">
         </option>
     </select>
     <br>

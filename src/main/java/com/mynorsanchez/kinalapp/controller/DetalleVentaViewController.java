@@ -2,6 +2,8 @@ package com.mynorsanchez.kinalapp.controller;
 
 import com.mynorsanchez.kinalapp.entity.DetalleVenta;
 import com.mynorsanchez.kinalapp.service.IDetalleVentaService;
+import com.mynorsanchez.kinalapp.service.IProductoService;
+import com.mynorsanchez.kinalapp.service.IVentaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +14,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class DetalleVentaViewController {
 
     private final IDetalleVentaService detalleVentaService;
+    private final IProductoService productoService;
+    private final IVentaService ventaService;
 
-    public DetalleVentaViewController(IDetalleVentaService detalleVentaService) {
+    public DetalleVentaViewController(IDetalleVentaService detalleVentaService, IProductoService productoService, IVentaService ventaService) {
         this.detalleVentaService = detalleVentaService;
+        this.productoService = productoService;
+        this.ventaService = ventaService;
     }
 
     @GetMapping
@@ -26,6 +32,8 @@ public class DetalleVentaViewController {
     @GetMapping("/nuevo")
     public String formularioNuevo(Model model) {
         model.addAttribute("detalle", new DetalleVenta());
+        model.addAttribute("productos", productoService.listarTodo());
+        model.addAttribute("ventas", ventaService.listarTodo());
         return "detalle-venta/formulario";
     }
 
@@ -49,6 +57,8 @@ public class DetalleVentaViewController {
         return detalleVentaService.buscarPorCodigoDetalleVenta(id)
                 .map(detalle -> {
                     model.addAttribute("detalle", detalle);
+                    model.addAttribute("productos", productoService.listarTodo());
+                    model.addAttribute("ventas", ventaService.listarTodo());
                     return "detalle-venta/formulario";
                 })
                 .orElseGet(() -> {
