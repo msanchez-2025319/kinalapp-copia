@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos</title>
+    <link rel="stylesheet" th:href="@{/css/Style.css}">
+</head>
+<a href="/dashboard">+ regreso a modulo de gestion</a>
+<body>
+
+<h1>Lista de Productos</h1>
+
+<a th:href="@{/vista/producto/nuevo}">+ Nuevo Producto</a>
+
+<br><br>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="producto : ${productos}">
+        <td th:text="${producto.codigoProducto}"></td>
+        <td th:text="${producto.nombreProducto}"></td>
+        <td th:text="${producto.precio}"></td>
+        <td th:text="${producto.stock}"></td>
+        <td th:text="${producto.estado}"></td>
+        <td>
+            <a th:href="@{/vista/producto/editar/{codigo}(codigo=${producto.codigoProducto})}">
+                Editar
+            </a>
+            |
+            <a th:href="@{/vista/producto/eliminar/{codigo}(codigo=${producto.codigoProducto})}"
+               onclick="return confirm('¿Eliminar este producto?')">
+                Eliminar
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

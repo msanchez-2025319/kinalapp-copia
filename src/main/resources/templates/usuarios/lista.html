@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/Style.css}">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios</title>
+</head>
+<a href="/dashboard">+ regreso a modulo de gestion</a>
+
+<body>
+<h1>Lista de Usuarios</h1>
+<a href="/vista/usuarios/nuevo">+ Nuevo Usuario</a>
+<br><br>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Código</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Rol</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usuario : ${usuarios}">
+        <td th:text="${usuario.codigoUsuario}"></td>
+        <td th:text="${usuario.username}"></td>
+        <td th:text="${usuario.email}"></td>
+        <td th:text="${usuario.rol}"></td>
+        <td th:text="${usuario.estado}"></td>
+        <td>
+            <a th:href="@{/vista/usuarios/editar/{codigo}(codigo=${usuario.codigoUsuario})}">Editar</a>
+            |
+            <a th:href="@{/vista/usuarios/eliminar/{codigo}(codigo=${usuario.codigoUsuario})}"
+               onclick="return confirm('¿Eliminar este usuario?')">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

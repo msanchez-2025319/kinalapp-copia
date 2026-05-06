@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Usuario</title>
+    <link rel="stylesheet" th:href="@{/css/Style.css}">
+</head>
+
+<body>
+
+<div sec:authorize="hasRole('ADMIN')">
+
+    <a th:href="@{/dashboard}">← regreso a módulo de gestión</a>
+
+    <h1>Formulario de Usuario</h1>
+
+    <form th:action="@{/vista/usuarios/guardar}" th:object="${usuario}" method="post">
+
+        <label>Código:</label>
+        <input type="number" th:field="*{codigoUsuario}" required />
+        <br>
+
+        <label>Username:</label>
+        <input type="text" th:field="*{username}" required />
+        <br>
+
+        <label>Password:</label>
+        <input type="password" th:field="*{password}" required />
+        <br>
+
+        <label>Email:</label>
+        <input type="email" th:field="*{email}" required />
+        <br>
+
+        <label>Rol:</label>
+        <select th:field="*{rol}">
+            <option value="USER">USER</option>
+            <option value="ADMIN">ADMIN</option>
+        </select>
+        <br>
+
+        <label>Estado:</label>
+        <select th:field="*{estado}" required>
+            <option value="1">Activo</option>
+            <option value="0">Inactivo</option>
+        </select>
+
+        <br><br>
+
+        <button type="submit">Guardar</button>
+        <a th:href="@{/vista/usuarios}">Cancelar</a>
+
+    </form>
+
+</div>
+
+</body>
+</html>

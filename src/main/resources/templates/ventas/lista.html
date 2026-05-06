@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ventas</title>
+    <link rel="stylesheet" th:href="@{/css/Style.css}">
+</head>
+<a href="/dashboard">+ regreso a modulo de gestion</a>
+
+<body>
+<h1>Lista de Ventas</h1>
+<a href="/vista/ventas/nuevo">+ Nueva Venta</a>
+<br><br>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Código</th>
+        <th>Fecha</th>
+        <th>Total</th>
+        <th>Estado</th>
+        <th>Cliente</th>
+        <th>Usuario</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="venta : ${ventas}">
+        <td th:text="${venta.codigoVenta}"></td>
+        <td th:text="${venta.fechaVenta}"></td>
+        <td th:text="${venta.total}"></td>
+        <td th:text="${venta.estado}"></td>
+        <td th:text="${venta.cliente.nombreCliente}"></td>
+        <td th:text="${venta.usuario.username}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

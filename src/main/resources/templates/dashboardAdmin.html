@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard Admin</title>
+    <link rel="stylesheet" href="/css/Style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">KinalApp</div>
+    <div class="user-info">
+        <span class="user-name">Bienvenido, <span th:text="${username}"></span></span>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="logout-btn">Cerrar Sesion</button>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <div class="welcome">
+        <h2>Panel de Control - Administrador</h2>
+        <p>Seleccione un modulo para gestionar</p>
+    </div>
+
+    <div class="modules">
+
+        <div class="module-card">
+            <div class="module-title">Clientes</div>
+            <div class="module-links">
+                <a th:href="@{/vista/clientes/nuevo}" class="btn btn-form">Nuevo</a>
+                <a th:href="@{/vista/clientes}" class="btn btn-list">Lista</a>
+            </div>
+        </div>
+
+        <div class="module-card">
+            <div class="module-title">Productos</div>
+            <div class="module-links">
+                <a th:href="@{/vista/producto/nuevo}" class="btn btn-form">Nuevo</a>
+                <a th:href="@{/vista/producto}" class="btn btn-list">Lista</a>
+            </div>
+        </div>
+
+        <div class="module-card">
+            <div class="module-title">Usuarios</div>
+            <div class="module-links">
+                <a th:href="@{/vista/usuarios/nuevo}" class="btn btn-form">Nuevo</a>
+                <a th:href="@{/vista/usuarios}" class="btn btn-list">Lista</a>
+            </div>
+        </div>
+
+        <div class="module-card">
+            <div class="module-title">Ventas</div>
+            <div class="module-links">
+                <a th:href="@{/vista/ventas/nuevo}" class="btn btn-form">Nuevo</a>
+                <a th:href="@{/vista/ventas}" class="btn btn-list">Lista</a>
+            </div>
+        </div>
+
+        <div class="module-card">
+            <div class="module-title">Detalle Venta</div>
+            <div class="module-links">
+                <a th:href="@{/vista/detalle-venta/nuevo}" class="btn btn-form">Nuevo</a>
+                <a th:href="@{/vista/detalle-venta}" class="btn btn-list">Lista</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
